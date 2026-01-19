@@ -16,17 +16,11 @@ export class Game extends Scene
         this.camera = this.cameras.main;
         this.camera.setBackgroundColor(0xffffff);
 
-        this.gameText = this.add.text(512, 384, 'Make something fun!\nand share it with us:\nsupport@phaser.io', {
-            fontFamily: '"SF Pro Rounded"', fontSize: 38, color: '#ffffff',
-            stroke: '#000000', strokeThickness: 8,
+        this.gameText = this.add.text(512, 384, 'Game Frame', {
+            fontFamily: '"SF Pro Rounded"', fontSize: 38, color: '#000000',
             align: 'center'
-        }).setOrigin(0.5).setDepth(100);
+        }).setOrigin(0.5).setDepth(100).setResolution(window.devicePixelRatio || 1);
 
         EventBus.emit('current-scene-ready', this);
-    }
-
-    changeScene ()
-    {
-        this.scene.start('GameOver');
     }
 }
