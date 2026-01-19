@@ -13,11 +13,11 @@ const buttonVariants = cva(
           "bg-orange-500 text-white shadow-[0_4px_0_#ca3500] active:translate-y-[2px] active:shadow-none",
 
         secondary:
-          "bg-indigo-700 text-white shadow-[0_4px_0_#1e1a4d] active:translate-y-[2px] active:shadow-none",
-                outline:
-          "border-2 border-indigo-700 text-indigo-700 shadow-[0_4px_0_#1e1a4d] active:translate-y-[2px] active:shadow-none",
+          "border-2 border-stone-200 bg-white text-stone-400 shadow-[0_2px_0_#e7e5e4] hover:bg-stone-50 active:translate-y-[1px] active:shadow-none",
+        outline:
+          "border-2 border-stone-200 bg-white text-stone-400 shadow-[0_2px_0_#e7e5e4] hover:bg-stone-50 active:translate-y-[1px] active:shadow-none",
         ghost:
-          "border-2 border-gray-200 bg-white text-gray-400 shadow-[0_2px_0_#e5e7eb] hover:bg-gray-50 active:translate-y-[1px] active:shadow-none",
+          "bg-transparent text-orange-500 shadow-none hover:bg-orange-50 hover:text-orange-600 active:bg-orange-100 active:translate-y-[1px] active:shadow-none",
         destructive:
           "bg-red-600 text-white shadow-[0_4px_0_#7f1d1d] active:translate-y-[2px] active:shadow-none",
       },
