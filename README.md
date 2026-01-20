@@ -26,7 +26,7 @@ game/
 ### Button
 
 ```tsx
-<Button variant="default" | "secondary" | "ghost" | "destructive" size="sm" | "default" | "lg">
+<Button variant="default" | "secondary" | "ghost" | "correct" | "incorrect" size="sm" | "default" | "lg">
 ```
 
 ### Card
@@ -41,6 +41,14 @@ game/
 <ChoiceGroup value={selected} onValueChange={setSelected} columns={1|2|3|4} multiple={false}>
   <ChoiceCard value="a" state="default" | "selected" | "correct" | "incorrect">Option A</ChoiceCard>
 </ChoiceGroup>
+```
+
+### FeedbackPanel
+
+```tsx
+<FeedbackPanel variant="correct" | "incorrect" title="Amazing!">
+  <p>Meaning: I would like a pizza.</p>
+</FeedbackPanel>
 ```
 
 ### ProgressBar

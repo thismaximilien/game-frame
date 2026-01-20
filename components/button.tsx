@@ -18,8 +18,10 @@ const buttonVariants = cva(
           "border-2 border-stone-200 bg-white text-stone-400 shadow-[0_2px_0_#e7e5e4] hover:bg-stone-50 active:translate-y-[1px] active:shadow-none",
         ghost:
           "bg-transparent text-orange-500 shadow-none hover:bg-orange-50 hover:text-orange-600 active:bg-orange-100 active:translate-y-[1px] active:shadow-none",
-        destructive:
-          "bg-red-600 text-white shadow-[0_4px_0_#7f1d1d] active:translate-y-[2px] active:shadow-none",
+        correct:
+          "bg-green-500 text-white shadow-[0_4px_0_#16a34a] active:translate-y-[2px] active:shadow-none",
+        incorrect:
+          "bg-red-500 text-white shadow-[0_4px_0_#dc2626] active:translate-y-[2px] active:shadow-none",
       },
       size: {
         default: "px-6 py-3 text-md",
