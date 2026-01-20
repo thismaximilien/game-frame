@@ -5,7 +5,7 @@ import { CheckCircleIcon, XCircleIcon } from "@phosphor-icons/react";
 
 import { cn } from "@/lib/utils";
 
-const feedbackPanelVariants = cva("fixed inset-x-0 bottom-0 w-full p-4 pb-6 md:px-6 sm:rounded-t-2xl max-w-2xl mx-auto", {
+const feedbackPanelVariants = cva("fixed inset-x-0 bottom-0 w-full p-4 pb-6 md:px-6", {
   variants: {
     variant: {
       correct: "bg-green-100 text-green-700",
@@ -17,11 +17,14 @@ const feedbackPanelVariants = cva("fixed inset-x-0 bottom-0 w-full p-4 pb-6 md:p
   },
 });
 
-export interface FeedbackPanelProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof feedbackPanelVariants> {
-  title?: string;
-}
+export type FeedbackPanelProps = Omit<
+  React.ComponentPropsWithoutRef<typeof motion.div>,
+  "children"
+> &
+  VariantProps<typeof feedbackPanelVariants> & {
+    title?: string;
+    children?: React.ReactNode;
+  };
 
 const FeedbackPanel = React.forwardRef<HTMLDivElement, FeedbackPanelProps>(
   ({ className, variant, title, children, ...props }, ref) => {
@@ -37,11 +40,13 @@ const FeedbackPanel = React.forwardRef<HTMLDivElement, FeedbackPanelProps>(
         className={cn(feedbackPanelVariants({ variant, className }))}
         {...props}
       >
-        <div className="mb-3 flex items-center gap-2">
-          <Icon className="size-8 shrink-0" weight="fill" />
-          <span className="text-xl font-bold">{title ?? defaultTitle}</span>
+        <div className="mx-auto max-w-2xl">
+          <div className="mb-3 flex items-center gap-2">
+            <Icon className="size-8 shrink-0" weight="fill" />
+            <span className="text-xl font-bold">{title ?? defaultTitle}</span>
+          </div>
+          {children}
         </div>
-        {children}
       </motion.div>
     );
   },
