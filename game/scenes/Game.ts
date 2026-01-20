@@ -1,7 +1,7 @@
+import Phaser from 'phaser';
 import { EventBus } from '../EventBus';
-import { Scene } from 'phaser';
 
-export class Game extends Scene
+export class Game extends Phaser.Scene
 {
     camera: Phaser.Cameras.Scene2D.Camera;
     gameText: Phaser.GameObjects.Text;
