@@ -9,15 +9,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-orange-500 text-white shadow-[0_4px_0_#ca3500]",
-        secondary:
-          "border-2 border-stone-200 bg-white text-stone-400 shadow-[0_2px_0_#e7e5e4] hover:bg-stone-50",
-        outline:
-          "border-2 border-stone-200 bg-white text-stone-400 shadow-[0_2px_0_#e7e5e4] hover:bg-stone-50",
-        ghost:
-          "bg-transparent text-orange-500 shadow-none hover:bg-orange-50 hover:text-orange-600 active:bg-orange-100",
-        correct: "bg-green-500 text-white shadow-[0_4px_0_#16a34a]",
-        incorrect: "bg-red-500 text-white shadow-[0_4px_0_#dc2626]",
+        default: "bg-orange-500 text-white",
+        secondary: "border-2 border-stone-200 bg-white text-stone-400 hover:bg-stone-50",
+        outline: "border-2 border-stone-200 bg-white text-stone-400 hover:bg-stone-50",
+        ghost: "bg-transparent text-orange-500 hover:bg-orange-50 hover:text-orange-600 active:bg-orange-100",
+        correct: "bg-green-500 text-white",
+        incorrect: "bg-red-500 text-white",
       },
       size: {
         default: "px-6 py-3 text-md",
@@ -33,13 +30,22 @@ const buttonVariants = cva(
   },
 );
 
+const shadowRest: Record<string, string> = {
+  default: "0 4px 0 #ca3500",
+  correct: "0 4px 0 #16a34a",
+  incorrect: "0 4px 0 #dc2626",
+  secondary: "0 2px 0 #e7e5e4",
+  outline: "0 2px 0 #e7e5e4",
+  ghost: "0 0 0 transparent",
+};
+
 const tapOffset: Record<string, number> = {
-  default: 2,
-  correct: 2,
-  incorrect: 2,
-  secondary: 1,
-  outline: 1,
-  ghost: 1,
+  default: 4,
+  correct: 4,
+  incorrect: 4,
+  secondary: 2,
+  outline: 2,
+  ghost: 0,
 };
 
 export interface ButtonProps
@@ -47,15 +53,19 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {}
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "default", size, ...props }, ref) => (
-    <motion.button
-      whileTap={{ y: tapOffset[variant ?? "default"], boxShadow: "0 0 0 transparent" }}
-      transition={{ duration: 0.08, ease: "easeOut" }}
-      className={cn(buttonVariants({ variant, size, className }))}
-      ref={ref}
-      {...props}
-    />
-  ),
+  ({ className, variant = "default", size, ...props }, ref) => {
+    const v = variant ?? "default";
+    return (
+      <motion.button
+        animate={{ y: 0, boxShadow: shadowRest[v] }}
+        whileTap={{ y: tapOffset[v], boxShadow: "0 0 0 transparent" }}
+        transition={{ duration: 0.08, ease: "easeOut" }}
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    );
+  },
 );
 Button.displayName = "Button";
 

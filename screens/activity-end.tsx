@@ -68,20 +68,21 @@ function formatValue(value: number, format: Stat["format"]) {
 }
 
 
-interface ActivityCompleteScreenProps {
+interface ActivityEndScreenProps {
   title: { text: string; color: StatColor };
   subtitle: string;
   stats: Stat[];
+  onRestart: () => void;
 }
 
-export function ActivityCompleteScreen({ title, subtitle, stats }: ActivityCompleteScreenProps) {
+export function ActivityEndScreen({ title, subtitle, stats, onRestart }: ActivityEndScreenProps) {
   const isSingleStat = stats.length === 1;
 
   return (
-    <div className="flex h-screen flex-col bg-white pt-8">
-      <div className="h-[32%] w-full bg-stone-200" />
+    <>
+      <div className="h-[32%] rounded-lg w-full bg-stone-200" />
 
-      <div className="flex flex-1 flex-col px-6 pt-10">
+      <div className="flex flex-1 flex-col pt-8">
         {isSingleStat ? (
           <div className="text-center">
             <motion.div
@@ -99,14 +100,14 @@ export function ActivityCompleteScreen({ title, subtitle, stats }: ActivityCompl
             <p className={`mt-2 text-2xl font-bold ${textColorMap[stats[0].color]}`}>
               {stats[0].label}
             </p>
-            <p className="mt-8 text-lg font-semibold text-stone-500">{subtitle}</p>
+            <p className="mt-8 text-2xl font-medium text-stone-500">{subtitle}</p>
           </div>
         ) : (
           // Multiple stats layout
           <>
             <div className="text-center">
-              <h1 className={`text-3xl font-bold ${textColorMap[title.color]}`}>{title.text}</h1>
-              <p className="mt-4 text-2xl text-stone-500">{subtitle}</p>
+              <h1 className={`text-3xl font-extrabold ${textColorMap[title.color]}`}>{title.text}</h1>
+              <p className="mt-4 text-2xl font-medium text-stone-500">{subtitle}</p>
             </div>
 
             <div className="mt-12 flex gap-8 px-6 items-center justify-center">
@@ -146,12 +147,12 @@ export function ActivityCompleteScreen({ title, subtitle, stats }: ActivityCompl
         )}
 
         {/* CTA */}
-        <div className="mt-auto pb-12">
-          <Button size="lg" className="w-full" onClick={() => console.log("replay")}>
-            Replay
+        <div className="mt-auto">
+          <Button size="lg" className="w-full" onClick={onRestart}>
+            Restart
           </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -22,7 +22,6 @@ const progressBarVariants = cva(
 );
 
 const bulgeSize = { sm: 16, md: 28, lg: 40 } as const;
-const bubbleConfig = { sm: 3, md: 5, lg: 7 } as const;
 
 const bubbles = [
   { angle: 30, distance: 26, size: 5, delay: 0 },
@@ -71,9 +70,9 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
       }
       if (percentage !== prevPercentage.current) {
         bulgeControls.start({
-          scale: [0, 1.5],
-          opacity: [0.6, 0],
-          transition: { duration: 0.5, ease: "easeOut" },
+          scale: [0, 1.6],
+          opacity: [1, 0],
+          transition: { duration: 0.7, ease: "easeOut" },
         });
         setBurstKey((k) => k + 1);
         prevPercentage.current = percentage;
@@ -92,6 +91,7 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
       >
         <motion.div
           className={cn("relative h-full rounded-full", indicator)}
+          initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
           transition={{ type: "spring", stiffness: 120, damping: 18 }}
         >
@@ -129,9 +129,9 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
               animate={{
                 x: Math.cos((b.angle * Math.PI) / 180) * b.distance,
                 y: `calc(-50% + ${Math.sin((b.angle * Math.PI) / 180) * b.distance}px)`,
-                opacity: [0, 0.5, 0],
+                opacity: [0, 0.9, 0],
               }}
-              transition={{ duration: 0.45, delay: b.delay, ease: "easeOut" }}
+              transition={{ duration: 0.6, delay: b.delay, ease: "easeOut" }}
             />
           ))}
         </motion.div>
